@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriConnect - Smart Farming Community</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Login Page Video Background -->
+<div class="login-video-bg">
+    <video autoplay muted loop playsinline>
+        <!-- 🔹 Replace this file with your background video -->
+        <source src="Assets/Farm.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+
+
+    
+    <!-- Dashboard Background -->
+    <div class="dashboard-bg"></div>
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">AgriConnect</div>
+                </div>
+                <div class="user-info" id="userInfo">
+                    <div class="user-details" onclick="toggleUserDropdown()">
+                        <div class="user-name" id="userName">User Name</div>
+                        <div class="user-role" id="userRole">Role</div>
+                    </div>
+                    <div class="user-avatar" id="userAvatar" onclick="toggleUserDropdown()">U</div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-item" onclick="showProfile()">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </div>
+                        <div class="dropdown-item" onclick="showSettings()">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </div>
+                        <div class="dropdown-item" onclick="showNotifications()">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" onclick="showHelp()">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                        </div>
+                        <div class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Login Page -->
+        <div class="page active" id="loginPage">
+            <div class="login-container">
+                <div class="login-box fade-in">
+                    <h2>Welcome to AgriConnect</h2>
+                    <p>Choose your role to continue</p>
+                    <div class="login-options">
+                        <div class="login-option" onclick="showFarmerLogin()">
+                            <i class="fas fa-tractor"></i>
+                            <h3>Farmer</h3>
+                            <p>Join the farming community, get expert advice, and buy quality products</p>
+                            <button class="btn btn-primary" style="margin-top: 15px;">
+                                <i class="fas fa-user"></i>
+                                Login as Farmer
+                            </button>
+                        </div>
+                        <div class="login-option" onclick="showShopkeeperLogin()">
+                            <i class="fas fa-store"></i>
+                            <h3>Shopkeeper</h3>
+                            <p>Sell agricultural products and manage your business efficiently</p>
+                            <button class="btn btn-secondary" style="margin-top: 15px;">
+                                <i class="fas fa-user-tie"></i>
+                                Login as Shopkeeper
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farmer Login Form -->
+        <div class="page" id="farmerLoginPage">
+            <div class="login-container">
+                <div class="login-form fade-in">
+                    <button class="btn btn-outline" onclick="showLoginPage()" style="margin-bottom: 20px;">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <h2 style="text-align: center; margin-bottom: 30px; color: #2d5a27;">Farmer Login</h2>
+                    <div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="farmerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="farmerPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="loginFarmer()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login as Farmer
+                        </button>
+                    </div>
+                    <div class="success-message" id="farmerLoginSuccess">
+                        Login successful! Redirecting to dashboard...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopkeeper Login Form -->
+        <div class="page" id="shopkeeperLoginPage">
+            <div class="login-container">
+                <div class="login-form fade-in">
+                    <button class="btn btn-outline" onclick="showLoginPage()" style="margin-bottom: 20px;">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <h2 style="text-align: center; margin-bottom: 30px; color: #2d5a27;">Shopkeeper Login</h2>
+                    <div>
+                        <div class="form-group">
+                            <label>Business Email</label>
+                            <input type="email" id="shopkeeperEmail" placeholder="Enter your business email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="shopkeeperPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="loginShopkeeper()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login as Shopkeeper
+                        </button>
+                    </div>
+                    <div class="success-message" id="shopkeeperLoginSuccess">
+                        Login successful! Redirecting to dashboard...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farmer Dashboard -->
+        <div class="page" id="farmerDashboard">
+            <div class="dashboard fade-in">
+                <div class="dashboard-header">
+                    <h1>🌾 Farmer Dashboard</h1>
+                    <p>Welcome to your agricultural community hub</p>
+                    <div class="dashboard-nav">
+                        <div class="nav-item active" onclick="showFarmerSection('community')">
+                            <i class="fas fa-users"></i> Community
+                        </div>
+                        <div class="nav-item" onclick="showFarmerSection('weather')">
+                            <i class="fas fa-cloud-sun"></i> Weather
+                        </div>
+                        <div class="nav-item" onclick="showFarmerSection('trending')">
+                            <i class="fas fa-chart-line"></i> Trending Crops
+                        </div>
+                        <div class="nav-item" onclick="showFarmerSection('marketplace')">
+                            <i class="fas fa-shopping-cart"></i> Marketplace
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Section -->
+                <div class="dashboard-content active" id="community">
+                    <div class="community-container">
+                        <h3 style="margin-bottom: 25px; color: #2d5a27;">
+                            <i class="fas fa-users"></i> Farming Community
+                        </h3>
+                        
+                        <div class="post-composer">
+                            <h4 style="margin-bottom: 15px;">Share with the community</h4>
+                            <div class="composer-buttons">
+                                <div class="composer-btn" onclick="showPostModal('photo')">
+                                    <i class="fas fa-camera"></i>
+                                    Share Photo
+                                </div>
+                                <div class="composer-btn" onclick="showPostModal('video')">
+                                    <i class="fas fa-video"></i>
+                                    Share Video
+                                </div>
+                                <div class="composer-btn" onclick="showPostModal('question')">
+                                    <i class="fas fa-question-circle"></i>
+                                    Ask Expert
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feed Posts -->
+                        <div id="communityFeed">
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar">RK</div>
+                                    <div>
+                                        <h4>Raj Kumar</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">2 hours ago • Maharashtra</p>
+                                    </div>
+                                </div>
+                                <p>Just implemented drip irrigation in my wheat field! The water efficiency has improved by 40%. Sharing some photos of the setup. Would love to hear your experiences with modern irrigation techniques. 🌾💧</p>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (24)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (8)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar">SM</div>
+                                    <div>
+                                        <h4>Sunita Mehta</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">4 hours ago • Punjab</p>
+                                    </div>
+                                </div>
+                                <p><strong>Question for experts:</strong> My tomato plants are showing yellow leaves despite proper watering and fertilization. The weather has been humid lately. Could this be a fungal infection? What organic treatments would you recommend? 🍅🤔</p>
+                                <div style="background: #f0f8ff; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                                    <p style="margin: 0; color: #2d5a27;"><strong>Expert Response from Dr. Anil Sharma:</strong></p>
+                                    <p style="margin: 5px 0 0 0;">This could be early blight. Try neem oil spray in the evening and ensure good air circulation. Remove affected leaves immediately.</p>
+                                </div>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (45)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (12)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar">AS</div>
+                                    <div>
+                                        <h4>Amit Singh</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">6 hours ago • Uttar Pradesh</p>
+                                    </div>
+                                </div>
+                                <p>Harvested 50 quintals of sugarcane per acre this season! Here's what worked for me: 1) Proper spacing, 2) Organic manure, 3) Timely pest control. The market prices are good right now at ₹350/quintal. 🎯</p>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (67)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (15)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Section -->
+                <div class="dashboard-content" id="weather">
+                    <div class="weather-widget">
+                        <h3 style="margin-bottom: 20px;">
+                            <i class="fas fa-map-marker-alt"></i> Pune, Maharashtra
+                        </h3>
+                        <div class="weather-main">
+                            <div>
+                                <i class="fas fa-sun" style="font-size: 64px; margin-bottom: 10px;"></i>
+                                <p>Sunny</p>
+                            </div>
+                            <div class="weather-temp">28°C</div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="weather-detail">
+                                <i class="fas fa-eye"></i>
+                                <p>Visibility</p>
+                                <strong>10 km</strong>
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-tint"></i>
+                                <p>Humidity</p>
+                                <strong>65%</strong>
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-wind"></i>
+                                <p>Wind</p>
+                                <strong>12 km/h</strong>
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-thermometer-half"></i>
+                                <p>Feels Like</p>
+                                <strong>31°C</strong>
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 15px; backdrop-filter: blur(10px);">
+                            <h4 style="margin-bottom: 15px;">7-Day Forecast</h4>
+                            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center;">
+                                <div><p style="margin: 0; font-size: 12px;">Mon</p><i class="fas fa-sun"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>29°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Tue</p><i class="fas fa-cloud-rain"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>26°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Wed</p><i class="fas fa-cloud-sun"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>27°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Thu</p><i class="fas fa-sun"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>30°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Fri</p><i class="fas fa-sun"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>32°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Sat</p><i class="fas fa-cloud"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>28°</strong></p></div>
+                                <div><p style="margin: 0; font-size: 12px;">Sun</p><i class="fas fa-cloud-rain"></i><p style="margin: 5px 0 0 0; font-size: 14px;"><strong>25°</strong></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Crops Section -->
+                <div class="dashboard-content" id="trending">
+                    <div class="trending-section">
+                        <h3 style="margin-bottom: 25px; color: #2d5a27;">
+                            <i class="fas fa-chart-line"></i> Trending Crops & Prices
+                        </h3>
+                        <div class="region-selector">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #2d5a27;">Select Region:</label>
+                            <select onchange="updateCropPrices(this.value)">
+                                <option value="maharashtra">Maharashtra</option>
+                                <option value="punjab">Punjab</option>
+                                <option value="uttar-pradesh">Uttar Pradesh</option>
+                                <option value="gujarat">Gujarat</option>
+                                <option value="rajasthan">Rajasthan</option>
+                                <option value="karnataka">Karnataka</option>
+                            </select>
+                        </div>
+                        <div class="crop-grid" id="cropGrid">
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h4>Wheat</h4>
+                                <div class="crop-price">₹2,150/quintal</div>
+                                <div class="price-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +5.2% from last week
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-corn"></i>
+                                </div>
+                                <h4>Rice</h4>
+                                <div class="crop-price">₹1,890/quintal</div>
+                                <div class="price-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +2.8% from last week
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-carrot"></i>
+                                </div>
+                                <h4>Sugarcane</h4>
+                                <div class="crop-price">₹350/quintal</div>
+                                <div class="price-trend trend-down">
+                                    <i class="fas fa-arrow-down"></i> -1.5% from last week
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-pepper-hot"></i>
+                                </div>
+                                <h4>Cotton</h4>
+                                <div class="crop-price">₹6,250/quintal</div>
+                                <div class="price-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +8.1% from last week
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-apple-alt"></i>
+                                </div>
+                                <h4>Tomato</h4>
+                                <div class="crop-price">₹1,200/quintal</div>
+                                <div class="price-trend trend-up">
+                                    <i class="fas fa-arrow-up"></i> +12.3% from last week
+                                </div>
+                            </div>
+                            <div class="crop-card">
+                                <div class="crop-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <h4>Onion</h4>
+                                <div class="crop-price">₹950/quintal</div>
+                                <div class="price-trend trend-down">
+                                    <i class="fas fa-arrow-down"></i> -3.2% from last week
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marketplace Section -->
+                <div class="dashboard-content" id="marketplace">
+                    <div class="trending-section">
+                        <h3 style="margin-bottom: 25px; color: #2d5a27;">
+                            <i class="fas fa-shopping-cart"></i> Agricultural Marketplace
+                        </h3>
+                        <div class="marketplace-filters">
+                            <div class="filter-row">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select onchange="filterProducts(this.value)">
+                                        <option value="all">All Products</option>
+                                        <option value="fertilizers">Fertilizers</option>
+                                        <option value="seeds">Seeds</option>
+                                        <option value="pesticides">Pesticides</option>
+                                        <option value="tools">Tools</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price Range</label>
+                                    <select>
+                                        <option>Any Price</option>
+                                        <option>Under ₹500</option>
+                                        <option>₹500 - ₹1000</option>
+                                        <option>₹1000 - ₹2000</option>
+                                        <option>Above ₹2000</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <select>
+                                        <option>Near Me</option>
+                                        <option>Maharashtra</option>
+                                        <option>Punjab</option>
+                                        <option>Gujarat</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-search"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-grid" id="productGrid">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Organic NPK Fertilizer</h4>
+                                    <div class="product-price">₹450/bag (50kg)</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> Green Agriculture Store
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">High-quality organic fertilizer suitable for all crops. Improves soil health and crop yield.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Hybrid Wheat Seeds</h4>
+                                    <div class="product-price">₹280/pack (1kg)</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> Premium Seeds Co.
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">High-yielding wheat variety with disease resistance. Perfect for winter sowing.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Neem-based Pesticide</h4>
+                                    <div class="product-price">₹320/liter</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> BioProtect Solutions
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Organic pesticide made from neem extract. Safe for crops and environment.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Garden Tool Kit</h4>
+                                    <div class="product-price">₹1,200/set</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> Farm Tools India
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Complete set of essential farming tools including spade, hoe, and pruners.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Drip Irrigation Kit</h4>
+                                    <div class="product-price">₹2,500/kit</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> Water Wise Systems
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Complete drip irrigation system for 1 acre. Save water and improve efficiency.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Soil Testing Kit</h4>
+                                    <div class="product-price">₹890/kit</div>
+                                    <div class="product-seller">
+                                        <i class="fas fa-store"></i> AgriTech Labs
+                                    </div>
+                                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Professional soil testing kit to check pH, NPK, and other nutrients.</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopkeeper Dashboard -->
+        <div class="page" id="shopkeeperDashboard">
+            <div class="dashboard fade-in">
+                <div class="dashboard-header">
+                    <h1>🏪 Shopkeeper Dashboard</h1>
+                    <p>Manage your agricultural business and connect with farmers</p>
+                    <div class="dashboard-nav">
+                        <div class="nav-item active" onclick="showShopkeeperSection('overview')">
+                            <i class="fas fa-chart-pie"></i> Overview
+                        </div>
+                        <div class="nav-item" onclick="showShopkeeperSection('products')">
+                            <i class="fas fa-box"></i> My Products
+                        </div>
+                        <div class="nav-item" onclick="showShopkeeperSection('orders')">
+                            <i class="fas fa-shopping-bag"></i> Orders
+                        </div>
+                        <div class="nav-item" onclick="showShopkeeperSection('community')">
+                            <i class="fas fa-users"></i> Community
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div class="dashboard-content active" id="overview">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: #4CAF50;">₹24,850</div>
+                            <div class="stat-label">Monthly Revenue</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: #2196F3;">127</div>
+                            <div class="stat-label">Total Orders</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: #FF9800;">18</div>
+                            <div class="stat-label">Active Products</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: #9C27B0;">4.8★</div>
+                            <div class="stat-label">Customer Rating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="trending-section">
+                        <h3 style="color: #2d5a27; margin-bottom: 25px;">
+                            <i class="fas fa-chart-bar"></i> Sales Analytics
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                            <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                                <h4 style="margin-bottom: 20px; color: #2d5a27;">Top Selling Products</h4>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                    <span>Organic Fertilizer</span>
+                                    <span style="color: #4CAF50; font-weight: bold;">45 sold</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                    <span>Wheat Seeds</span>
+                                    <span style="color: #4CAF50; font-weight: bold;">32 sold</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                    <span>Neem Pesticide</span>
+                                    <span style="color: #4CAF50; font-weight: bold;">28 sold</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Tool Kit</span>
+                                    <span style="color: #4CAF50; font-weight: bold;">22 sold</span>
+                                </div>
+                            </div>
+                            <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                                <h4 style="margin-bottom: 20px; color: #2d5a27;">Recent Activity</h4>
+                                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                    <p style="margin: 0; font-weight: bold;">New Order #ORD124</p>
+                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Raj Kumar ordered Organic Fertilizer</p>
+                                </div>
+                                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                    <p style="margin: 0; font-weight: bold;">Product Added</p>
+                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Bio-Pesticide added to inventory</p>
+                                </div>
+                                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                    <p style="margin: 0; font-weight: bold;">Order Delivered</p>
+                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Order #ORD119 delivered successfully</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="dashboard-content" id="products">
+                    <div class="trending-section">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                            <h3 style="color: #2d5a27; margin: 0;">
+                                <i class="fas fa-box"></i> My Products
+                            </h3>
+                            <button class="btn btn-primary" onclick="showAddProductModal()">
+                                <i class="fas fa-plus"></i> Add Product
+                            </button>
+                        </div>
+                        <div class="product-grid">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Organic NPK Fertilizer</h4>
+                                    <div class="product-price">₹450/bag</div>
+                                    <div style="color: #666; font-size: 14px; margin: 5px 0;">Stock: 85 bags</div>
+                                    <div style="color: #4CAF50; font-size: 14px; margin-bottom: 15px;">
+                                        <i class="fas fa-star"></i> 4.5 (23 reviews)
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn" style="background: #FFC107; color: #000;">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn" style="background: #f44336; color: white;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Hybrid Wheat Seeds</h4>
+                                    <div class="product-price">₹280/pack</div>
+                                    <div style="color: #666; font-size: 14px; margin: 5px 0;">Stock: 120 packs</div>
+                                    <div style="color: #4CAF50; font-size: 14px; margin-bottom: 15px;">
+                                        <i class="fas fa-star"></i> 4.7 (31 reviews)
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn" style="background: #FFC107; color: #000;">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn" style="background: #f44336; color: white;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Neem-based Pesticide</h4>
+                                    <div class="product-price">₹320/liter</div>
+                                    <div style="color: #666; font-size: 14px; margin: 5px 0;">Stock: 45 liters</div>
+                                    <div style="color: #4CAF50; font-size: 14px; margin-bottom: 15px;">
+                                        <i class="fas fa-star"></i> 4.3 (18 reviews)
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn" style="background: #FFC107; color: #000;">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn" style="background: #f44336; color: white;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div class="dashboard-content" id="orders">
+                    <div class="trending-section">
+                        <h3 style="color: #2d5a27; margin-bottom: 25px;">
+                            <i class="fas fa-shopping-bag"></i> Order Management
+                        </h3>
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#ORD124</strong></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="post-avatar" style="width: 35px; height: 35px; font-size: 14px;">RK</div>
+                                            <div>
+                                                <p style="margin: 0; font-weight: bold;">Raj Kumar</p>
+                                                <p style="margin: 0; font-size: 12px; color: #666;">Maharashtra</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Organic NPK Fertilizer</td>
+                                    <td>5 bags</td>
+                                    <td><strong>₹2,250</strong></td>
+                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                    <td>20 Sep 2025</td>
+                                    <td>
+                                        <button class="btn" style="background: #4CAF50; color: white; padding: 8px 12px; font-size: 12px;">
+                                            Ship Order
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD123</strong></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="post-avatar" style="width: 35px; height: 35px; font-size: 14px;">SM</div>
+                                            <div>
+                                                <p style="margin: 0; font-weight: bold;">Sunita Mehta</p>
+                                                <p style="margin: 0; font-size: 12px; color: #666;">Punjab</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Hybrid Wheat Seeds</td>
+                                    <td>3 packs</td>
+                                    <td><strong>₹840</strong></td>
+                                    <td><span class="status-badge status-shipped">Shipped</span></td>
+                                    <td>19 Sep 2025</td>
+                                    <td>
+                                        <button class="btn" style="background: #2196F3; color: white; padding: 8px 12px; font-size: 12px;">
+                                            Track Order
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD122</strong></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="post-avatar" style="width: 35px; height: 35px; font-size: 14px;">AS</div>
+                                            <div>
+                                                <p style="margin: 0; font-weight: bold;">Amit Singh</p>
+                                                <p style="margin: 0; font-size: 12px; color: #666;">UP</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Garden Tool Kit</td>
+                                    <td>1 set</td>
+                                    <td><strong>₹1,200</strong></td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>18 Sep 2025</td>
+                                    <td>
+                                        <button class="btn" style="background: #666; color: white; padding: 8px 12px; font-size: 12px;">
+                                            View Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD121</strong></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="post-avatar" style="width: 35px; height: 35px; font-size: 14px;">PK</div>
+                                            <div>
+                                                <p style="margin: 0; font-weight: bold;">Priya Kumari</p>
+                                                <p style="margin: 0; font-size: 12px; color: #666;">Bihar</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Neem Pesticide</td>
+                                    <td>2 liters</td>
+                                    <td><strong>₹640</strong></td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>17 Sep 2025</td>
+                                    <td>
+                                        <button class="btn" style="background: #666; color: white; padding: 8px 12px; font-size: 12px;">
+                                            View Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD120</strong></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="post-avatar" style="width: 35px; height: 35px; font-size: 14px;">VS</div>
+                                            <div>
+                                                <p style="margin: 0; font-weight: bold;">Vikram Sharma</p>
+                                                <p style="margin: 0; font-size: 12px; color: #666;">Rajasthan</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Drip Irrigation Kit</td>
+                                    <td>1 kit</td>
+                                    <td><strong>₹2,500</strong></td>
+                                    <td><span class="status-badge status-shipped">Shipped</span></td>
+                                    <td>16 Sep 2025</td>
+                                    <td>
+                                        <button class="btn" style="background: #2196F3; color: white; padding: 8px 12px; font-size: 12px;">
+                                            Track Order
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Community Section for Shopkeepers -->
+                <div class="dashboard-content" id="shopkeeper-community">
+                    <div class="community-container">
+                        <h3 style="margin-bottom: 25px; color: #2d5a27;">
+                            <i class="fas fa-users"></i> Business Community
+                        </h3>
+                        
+                        <div class="post-composer">
+                            <h4 style="margin-bottom: 15px;">Share your products with farmers</h4>
+                            <div class="composer-buttons">
+                                <div class="composer-btn" onclick="showProductPostModal()">
+                                    <i class="fas fa-box"></i>
+                                    Promote Product
+                                </div>
+                                <div class="composer-btn" onclick="showOfferModal()">
+                                    <i class="fas fa-percent"></i>
+                                    Create Offer
+                                </div>
+                                <div class="composer-btn" onclick="showTipModal()">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Share Tip
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Feed for Shopkeepers -->
+                        <div id="shopkeeperFeed">
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar" style="background: linear-gradient(45deg, #2196F3, #1976D2);">GS</div>
+                                    <div>
+                                        <h4>Green Agriculture Store</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">3 hours ago • Verified Seller</p>
+                                    </div>
+                                </div>
+                                <p><strong>🎯 Special Offer Alert!</strong> Get 15% off on all organic fertilizers this week! Perfect timing for your winter crop preparation. Limited stock available - first come, first served! 🌱</p>
+                                <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                                    <p style="margin: 0; font-weight: bold; color: #2d5a27;">Offer Code: ORGANIC15</p>
+                                    <p style="margin: 5px 0 0 0; color: #666;">Valid till: 25th September 2025</p>
+                                </div>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (89)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (23)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar" style="background: linear-gradient(45deg, #FF9800, #F57C00);">PS</div>
+                                    <div>
+                                        <h4>Premium Seeds Co.</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">5 hours ago • Verified Seller</p>
+                                    </div>
+                                </div>
+                                <p><strong>🌾 Farming Tip Tuesday:</strong> For maximum wheat yield, maintain 22-25cm row spacing and ensure proper seed depth of 3-5cm. Our hybrid seeds perform best with this technique. Happy farming! 📈</p>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (156)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (45)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="feed-post">
+                                <div class="post-header">
+                                    <div class="post-avatar" style="background: linear-gradient(45deg, #4CAF50, #45a049);">BP</div>
+                                    <div>
+                                        <h4>BioProtect Solutions</h4>
+                                        <p style="color: #666; font-size: 14px; margin: 0;">8 hours ago • Verified Seller</p>
+                                    </div>
+                                </div>
+                                <p>🔬 <strong>New Product Launch:</strong> Introducing our advanced bio-pesticide formula! Made from natural neem extracts, it's 40% more effective against common pests while being completely safe for crops and soil. Now available for pre-order!</p>
+                                <div class="post-actions">
+                                    <button class="action-btn">
+                                        <i class="fas fa-thumbs-up"></i> Like (72)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-comment"></i> Comment (18)
+                                    </button>
+                                    <button class="action-btn">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="fab">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Modals -->
+    
+    <!-- Post Modal for Farmers -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <h3>Share with Community</h3>
+            <form>
+                <div class="form-group">
+                    <label>Post Type</label>
+                    <select id="postType">
+                        <option value="photo">Share Photo</option>
+                        <option value="video">Share Video</option>
+                        <option value="question">Ask Expert</option>
+                        <option value="update">General Update</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Upload Media (Optional)</label>
+                    <input type="file" accept="image/*,video/*">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="4" placeholder="Share your farming experience, ask questions, or update the community..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" placeholder="Your location (optional)">
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 25px;">
+                    <button type="button" class="btn" style="background: #666; color: white;" onclick="closeModal('postModal')">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="submitPost()">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-content">
+            <h3>Add New Product</h3>
+            <form>
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" placeholder="Enter product name" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select required>
+                        <option value="">Select Category</option>
+                        <option value="fertilizers">Fertilizers</option>
+                        <option value="seeds">Seeds</option>
+                        <option value="pesticides">Pesticides</option>
+                        <option value="tools">Tools</option>
+                        <option value="irrigation">Irrigation Equipment</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" placeholder="Enter price" required>
+                </div>
+                <div class="form-group">
+                    <label>Unit</label>
+                    <select required>
+                        <option value="">Select Unit</option>
+                        <option value="kg">Per KG</option>
+                        <option value="bag">Per Bag</option>
+                        <option value="liter">Per Liter</option>
+                        <option value="piece">Per Piece</option>
+                        <option value="set">Per Set</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Stock Quantity</label>
+                    <input type="number" placeholder="Available quantity" required>
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="3" placeholder="Product description, benefits, usage instructions..."></textarea>
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 25px;">
+                    <button type="button" class="btn" style="background: #666; color: white;" onclick="closeModal('addProductModal')">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+                                
